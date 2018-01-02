@@ -14,31 +14,36 @@ namespace RockPaperScissorsLizardSpock
     {
 
         static void Main(string[] args)
+         {
+        string inputPlayer, inputCPU;
+        int randomInt;
+        int scorePlayer = 0;
+        int scoreCPU = 0;
+        bool playAgain = true;
+
+        public void Play(bool playAgain, int scoreCPU,int scorePlayer)
         {
-            string inputPlayer, inputCPU;
-            int randomInt;
-            int scorePlayer = 0;
-            int scoreCPU = 0;
-            bool playAgain = true;
-
-            while (playAgain)
+            while (scorePlayer < 5 || scoreCPU < 5)
             {
-                scorePlayer = 0;
-                scoreCPU = 0;
+               //scorePlayer = 0;
+               //scoreCPU = 0;
 
-            }
+           }
+       }
+           
 
 
-            while (scorePlayer < 5 && scoreCPU < 5)
-            {
+           public void Rules(string inputPlayer, int randomInt)
+        {
+            Console.Write("Choose between Rock, Paper, Scissors, Lizard , Spock:");
+            inputPlayer = Console.ReadLine();
+            inputPlayer = inputPlayer.ToUpper();
 
-                Console.Write("Choose between Rock, Paper, Scissors, Lizard , Spock:");
-                inputPlayer = Console.ReadLine();
-                inputPlayer = inputPlayer.ToUpper();
+            Random rnd = new Random();
 
-                Random rnd = new Random();
-
-                randomInt = rnd.Next(1, 6);
+            randomInt = rnd.Next(1, 6);
+        }
+               
                 switch (randomInt)
                 {
                     case 1:
@@ -192,8 +197,10 @@ namespace RockPaperScissorsLizardSpock
                         break;
                 }
 
+               public void Winner(int scorePlayer, int scoreCPU)
+            {
                 Console.WriteLine("\n\nScores:\tPlayer:/t{0}\tCPU:t{1}", scorePlayer, scoreCPU);
-            }
+            
             if (scorePlayer == 5)
             {
                 Console.WriteLine("Player Wins!");
@@ -206,7 +213,10 @@ namespace RockPaperScissorsLizardSpock
             {
 
             }
+    }
+   
 
+           public void newGame(bool playAgain)
             Console.WriteLine("Would you like to play again?(y/n)");
             string loop = Console.ReadLine();
             if (loop == "y")
@@ -220,7 +230,7 @@ namespace RockPaperScissorsLizardSpock
             }
         }
     }
-}
+//}
 
 
 
