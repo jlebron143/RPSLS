@@ -11,7 +11,7 @@ namespace RockPaperScissorsLizardSpock
 		static void Main(string[] args)
 		{
 		
-		RockPaperScissorsLizardSpock game = new RockPaperScissorsLizardSpock();
+		Game game = new Game();
 
 		game.Play();
 		}

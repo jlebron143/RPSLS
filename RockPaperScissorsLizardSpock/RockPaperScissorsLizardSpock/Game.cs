@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace RockPaperScissorsLizardSpock
 {
-    public class RockPaperScissorsLizardSpock
+    public class Game
     {
 
         static void Main(string[] args)
