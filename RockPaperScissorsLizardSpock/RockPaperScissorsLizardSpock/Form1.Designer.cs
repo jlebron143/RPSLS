@@ -1,4 +1,4 @@
-﻿namespace RPSLP
+﻿namespace RockPaperScissorsLizardSpock
 {
     partial class Form1
     {

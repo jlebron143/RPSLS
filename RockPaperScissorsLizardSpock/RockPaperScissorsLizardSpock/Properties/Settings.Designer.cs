@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RPSLP.Properties
+namespace RockPaperScissorsLizardSpock.Properties
 {
 
 
