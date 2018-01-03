@@ -10,17 +10,17 @@ using System.Windows.Forms;
 
 namespace RockPaperScissorsLizardSpock
 {
-    public class Game
+    class Game
     {
+        
 
-        static void Main(string[] args)
-        {
+        
             string inputPlayer, inputCPU;
             int randomInt;
             int scorePlayer = 0;
             int scoreCPU = 0;
             bool playAgain = true;
-        }
+        
 
         public void Play(bool playAgain, int scoreCPU, int scorePlayer)
         {
@@ -36,9 +36,9 @@ namespace RockPaperScissorsLizardSpock
 
         public void Rules(string inputPlayer, int randomInt)
         {
-            Console.Write("Choose between Rock, Paper, Scissors, Lizard , Spock:");
+            Console.Write("Choose between Rock, Paper, Scissors, Lizard , Spock. Best out of five wins the game.");
             inputPlayer = Console.ReadLine();
-            inputPlayer = inputPlayer.ToUpper();
+            inputPlayer = inputPlayer.ToLower();
 
             Random rnd = new Random();
 
@@ -55,7 +55,7 @@ namespace RockPaperScissorsLizardSpock
                 {
                     Console.WriteLine("Draw!\n\n");
                 }
-                else if (inputPlayer == "PAPER")
+                else if (inputPlayer == "Paper")
                 {
                     Console.WriteLine("Player Wins! Paper covers Rock!\n\n");
                     scorePlayer++;
