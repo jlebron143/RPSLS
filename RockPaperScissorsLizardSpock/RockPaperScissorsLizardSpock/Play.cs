@@ -10,242 +10,129 @@ namespace RockPaperScissorsLizardSpock
         {
 
 
+        Player1 player1;
+        Player2 player2;
+        private int tempPlayPick1;
+        private int tempPlayPick2;
+        private int roundCount;
+        private string levelWinner;
 
-            string inputPlayer, inputCPU;
-            int randomInt;
-            int scorePlayer = 0;
-            int scoreCPU = 0;
-            bool playAgain = true;
+        public Play()
+        {
+            OpeningStatement();
+            ShowPlayersNames();
+            player1 = new Player1();
+            player2 = new Player2();
+            roundCount = 1;
+        }
 
 
-            public void Game (bool playAgain, int scoreCPU, int scorePlayer)
+        private void OpeningStatement()
+        {
+
+            Console.WriteLine("Hello!");
+            Console.WriteLine("Welcome to Sheldon's Rock-Paper-Scissors-Lizard-Spock.");
+            Console.WriteLine("Here are the rules!");
+            Console.WriteLine("Each player will make a choice to throw (Rock, Paper, Scissors, Lizard , Spock)");
+            Console.WriteLine("Now pay close attention........ ");
+            Console.WriteLine("Paper cover Rock");
+            Console.WriteLine("Scissors cuts Paper");
+            Console.WriteLine("Rock crushers Scissors");
+            Console.WriteLine("Lizard eats Paper");
+            Console.WriteLine("Rock Crushes Lizard");
+            Console.WriteLine("Scissors decapitates Lizard");
+            Console.WriteLine("Lizard poisons Spock");
+            Console.WriteLine("Spock vaporizes Rock");
+            Console.WriteLine("Spock smashes Scissors");
+            Console.WriteLine("Paper disproves Spock");
+            Console.WriteLine("..... did you get all that? I know its a lot but its important to know");
+            Console.WriteLine("This game is played between two players.");
+            Console.WriteLine("The best out of 3 wins the game");
+            Console.WriteLine("I hope you're ready. Let's have some fun!");
+        }
+
+        public void RunGame()
+        {
+
+            player1.UserChoice();
+            if (player2.actualPerson == true)
             {
-                while (scorePlayer < 5 || scoreCPU < 5)
-                {
-                    //scorePlayer = 0;
-                    //scoreCPU = 0;
-
-                }
+                player2.UserChoice();
+            }
+            else
+            {
+                player2.AmyGetsToChoose();
+            }
+            ShowUserChoice();
+            tempPlayPick1 = player1.TransChoiceToNumber(player1.playPick);
+            tempPlayPick2 = player2.TransChoiceToNumber(player2.playPick);
+            DecideRoundWinner(tempPlayPick1, tempPlayPick2);
+            player1.ShowLevelsWon();
+            player2.ShowLevelsWon();
+            if (player1.levelsWon == 2)
+            {
+                ShowWinner(player1.playerName);
+            }
+            else if (player2.levelsWon == 2)
+            {
+                ShowWinner(player2.playerName);
+            }
+            else
+            {
+                RunGame();
             }
 
+        }
+
+        private void ShowWinner(string playerName)
+        {
+            Console.WriteLine("Game Over!" + playerName + " is the winner!!!");
+        }
+
+        private void ShowUserChoice()
+        {
+            Console.WriteLine("Round" + roundCount);
+            Console.WriteLine(player1.playerName + "chose" + player1.playPick);
+            Console.WriteLine(player2.playerName + "chose" + player2.playPick);
+        }
+
+        private void ShowPlayersNames()
+        {
+            Console.WriteLine("Player1: " + player1.playerName);
+            Console.WriteLine("Player2: " + player2.playerName);
+            Console.WriteLine("Best of Luck! Now Begin....");
+       }
 
 
-            public void Rules(string inputPlayer, int randomInt)
+        private void DecideRoundWinner(int pick1, int pick2)
+        {
+            int finalRoundWinner;
+            finalRoundWinner = (5 + pick1 - pick2) % 5;
+            if (finalRoundWinner == 0)
             {
-                Console.Write("Choose between Rock, Paper, Scissors, Lizard , Spock. Best out of five wins the game.");
-                inputPlayer = Console.ReadLine();
-                inputPlayer = inputPlayer.ToLower();
-
-                Random rnd = new Random();
-
-                randomInt = rnd.Next(1, 6);
+                Console.WriteLine("Looks like we have a Tie.....");
+                Console.WriteLine();
+                roundCount += 1;
             }
-            public void RunGame(string inputPlayer, string inputCPU, int randomInt, int scoreCPU, int scorePlayer)
+            else if (finalRoundWinner == 1 || finalRoundWinner == 3)
             {
-                switch (randomInt)
-                {
-                    case 1:
-                        inputCPU = "Rock";
-                        Console.WriteLine("Computer chose Rock");
-                        if (inputPlayer == "Rock")
-                        {
-                            Console.WriteLine("Draw!\n\n");
-                        }
-                        else if (inputPlayer == "Paper")
-                        {
-                            Console.WriteLine("Player Wins! Paper covers Rock!\n\n");
-                            scorePlayer++;
-                        }
-                        else if (inputPlayer == "Scissors")
-
-                        {
-                            Console.WriteLine("CPU Wins! Rock smashes Scissors!\n\n");
-                            scoreCPU++;
-                        }
-                        else if (inputPlayer == "Lizard")
-                        {
-                            Console.WriteLine("CPU Wins! Rock crushes Lizard!\n\n");
-
-                            scoreCPU++;
-                        }
-                        else if (inputPlayer == "Spock")
-                        {
-                            Console.WriteLine("CPU Wins! Spock vaporizes Rock!\n\n");
-                            scoreCPU++;
-                        }
-                        break;
-                    case 2:
-                        inputCPU = "Paper";
-                        Console.WriteLine("Computer chose Paper");
-                        if (inputPlayer == "Paper")
-                        {
-                            Console.WriteLine("Draw!\n\n");
-                        }
-                        else if (inputPlayer == "Rock")
-                        {
-                            Console.WriteLine("CPU Wins! Paper covers Rock!\n\n");
-                            scoreCPU++;
-                        }
-                        else if (inputPlayer == "Scissors")
-                        {
-                            Console.WriteLine("Player Wins! Scissors cuts Paper!\n\n");
-                            scoreCPU++;
-                        }
-                        else if (inputPlayer == "Lizard")
-                        {
-                            Console.WriteLine("Player Wins! Lizard eats Paper!\n\n");
-                            scorePlayer++;
-                        }
-                        else if (inputPlayer == "Spock")
-                        {
-                            Console.WriteLine("CPU Wins! Paper disproves Spock!\n\n");
-                            scoreCPU++;
-                        }
-                        break;
-                    case 3:
-                        inputCPU = "Scissors";
-                        Console.WriteLine("Computer chose Scissors!");
-                        if (inputPlayer == "Scissors")
-                        {
-                            Console.WriteLine("Draw!\n\n");
-
-                        }
-                        else if (inputPlayer == "Rock")
-                        {
-                            Console.WriteLine("Player Wins! Rock crushes Scissors!\n\n");
-                            scorePlayer++;
-                        }
-                        else if (inputPlayer == "Paper")
-                        {
-                            Console.WriteLine("CPU Wins! Scissors cuts Paper!\n\n");
-                            scoreCPU++;
-                        }
-                        else if (inputPlayer == "Lizard")
-                        {
-                            Console.WriteLine("CPU Wins! Scissors decapitates Lizard!\n\n");
-                            scoreCPU++;
-                        }
-                        else if (inputPlayer == "Spock")
-                        {
-                            Console.WriteLine("Player Wins! Spock smashes Scissors!\n\n");
-                            scorePlayer++;
-                        }
-                        break;
-
-                    case 4:
-                        inputCPU = "Lizard";
-                        Console.WriteLine("Computer chose Lizard!");
-                        if (inputPlayer == "Lizard")
-                        {
-                            Console.WriteLine("Draw!\n\n");
-
-                        }
-                        else if (inputPlayer == "Rock")
-                        {
-                            Console.WriteLine("Player Wins!Rock crushes lizard!\n\n");
-                            scorePlayer++;
-                        }
-                        else if (inputPlayer == "Paper")
-                        {
-                            Console.WriteLine("CPU Wins!Lizard eats Paper!\n\n");
-                            scoreCPU++;
-                        }
-                        else if (inputPlayer == "Scissors")
-                        {
-                            Console.WriteLine("Player Wins! Scissors decapitates Lizard!\n\n");
-                            scorePlayer++;
-                        }
-                        else if (inputPlayer == "Spock")
-                        {
-                            Console.WriteLine("Player Wins! Lizard poisons Spock!\n\n");
-                            scorePlayer++;
-                        }
-                        break;
-
-                    case 5:
-                        inputCPU = "Spock";
-                        Console.WriteLine("Computer chose Spock!");
-                        if (inputPlayer == "Spock")
-                        {
-                            Console.WriteLine("DRAW!! \n\n");
-                        }
-                        else if (inputPlayer == "Rock")
-                        {
-                            Console.WriteLine("CPU Wins! Spock vaporizes Rock!\n\n");
-                            scoreCPU++;
-                        }
-                        else if (inputPlayer == "Paper")
-                        {
-                            Console.WriteLine("Player Wins! Paper disproves Spock!\n\n");
-                            scorePlayer++;
-                        }
-                        else if (inputPlayer == "Scissors")
-                        {
-                            Console.WriteLine("CPU Wins!Spock smashes Scissors!\n\n");
-                            scoreCPU++;
-                        }
-                        else if (inputPlayer == "Lizard")
-                        {
-                            Console.WriteLine("Player Wins! Lizard Poisons Spock!!\n\n");
-                            scorePlayer++;
-                        }
-                        break;
-                    default:
-                        Console.WriteLine("Invaild entry!");
-                        break;
-                }
+                levelWinner = player1.playerName;
+                Console.WriteLine("The winner of this round is" + levelWinner.ToUpper());
+                Console.WriteLine();
+                player1.levelsWon += 1;
+                roundCount += 1;
             }
-
-
-            public void Winner(int scorePlayer, int scoreCPU)
+            else if (finalRoundWinner == 2 || finalRoundWinner == 4)
             {
-                Console.WriteLine("\n\nScores:\tPlayer:/t{0}\tCPU:t{1}", scorePlayer, scoreCPU);
-
-                if (scorePlayer == 5)
-                {
-                    Console.WriteLine("Player Wins!");
-                }
-                else if (scoreCPU == 5)
-                {
-                    Console.WriteLine("CPU Wins!");
-                }
-                else
-                {
-
-                }
-            }
-
-
-            public void newGame(bool playAgain)
-            {
-                Console.WriteLine("Would you like to play again?(y/n)");
-                string loop = Console.ReadLine();
-                if (loop == "y")
-                {
-                    playAgain = true;
-                    Console.Clear();
-                }
-                else if (loop == "n")
-                {
-                    playAgain = false;
-
-                }
+                levelWinner = player2.playerName;
+                Console.WriteLine("The winner of this round is" + levelWinner.ToUpper());
+                Console.WriteLine();
+                player2.levelsWon += 1;
+                roundCount += 1;
             }
         }
     }
-//}
-
-
-
-
-
-
-
-
-
-
-
-
+}
 
 
 
